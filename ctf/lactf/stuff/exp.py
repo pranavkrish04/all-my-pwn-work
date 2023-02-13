@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from pwn import *
 
-exe = './'
+exe = './stuff'
 elf = context.binary = ELF(exe)
 # libc = ELF("")
 
@@ -22,6 +22,8 @@ continue
 
 p = start()
 
-
-
+for i in range(1000000):
+    p.recvuntil(b"\n")
+    p.sendline(b"1")
+    print(p.recvline())
 p.interactive()
