@@ -1,13 +1,5 @@
 # tcache poisoning - niteCTF
-
-[exp.py](tcache%20poisoning%20-%20niteCTF%20fb243762b0e44f69bad291c2f601ec12/exp.py)
-
-[heapchall](tcache%20poisoning%20-%20niteCTF%20fb243762b0e44f69bad291c2f601ec12/heapchall.txt)
-
-[ld-linux-x86-64.so.2](tcache%20poisoning%20-%20niteCTF%20fb243762b0e44f69bad291c2f601ec12/ld-linux-x86-64.so.2)
-
-[libc.so.6](tcache%20poisoning%20-%20niteCTF%20fb243762b0e44f69bad291c2f601ec12/libc.so.6)
-
+---
 ### Explanation:
 
 - tcache poisoning tricks the malloc into pointing to an arbitrary address. Since we can read after a chunk is freed we can get the libc and heap leak.
