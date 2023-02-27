@@ -22,4 +22,4 @@ main:
     syscall
 
 section .data
-    flag: db "/home/tourpran/Download/all-my-pwn-work/python-jail-seccomp/flag-0d27230887e55ab85939af13dce0c76b.txt", 0 
+    flag: db "/home/ctf/flag-0479f1dcda629bbe833598bce876a647.txt", 0 

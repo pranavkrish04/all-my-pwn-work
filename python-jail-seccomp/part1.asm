@@ -47,5 +47,5 @@ rec:
 	syscall
 
 section .data
-	s_root: db "/home/tourpran/Download/all-my-pwn-work/python-jail-seccomp",0
+	s_root: db "/home/ctf",0
 	s_newline: db 0x0a
