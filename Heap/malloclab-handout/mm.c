@@ -75,7 +75,6 @@ int mm_init(void)
         return 0;
     }
     called_mminit = 1;
-    PUT(mem_sbrk(8), 0x5452);
     if((lastfreedchunk = extend_heap(INITIAL_SIZE)) == NULL){
         return -1;
     }
